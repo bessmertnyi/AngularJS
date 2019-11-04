@@ -1,0 +1,10 @@
+.border {
+  border: 2px solid black;
+}
+
+.validRed {
+  color: red;
+}
+.validGreen {
+  color: green;
+}

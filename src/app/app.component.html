@@ -1,0 +1,104 @@
+<input type="text" (input)="onInput($event)">
+<br>
+
+<button (click)="mouseClick()">
+  CLICK MEEE
+</button>
+<br>
+
+<div *ngIf="status">
+  {{text}}
+</div>
+<br>
+<br>
+
+<button (click)="showLogin()">LOGIN</button>
+<br>
+<button (click)="showRegister()">REGISTER</button>
+
+<div *ngIf="Login">
+  <form (ngSubmit)="loginUser()" #validFromLogin="ngForm">
+    <h2>Login</h2>
+    <label [ngClass]="validEmail.invalid && validEmail.touched ? 'validRed' : 'validGreen'">Email - </label>
+    <input type="text" name="email" placeholder="Email"
+           [(ngModel)]="employeeLogin.email"
+           #validEmail="ngModel"
+           required
+           email
+    >
+    <br>
+    <label [ngClass]="validPassw.invalid && validPassw.touched ? 'validRed' : 'validGreen'"> Passw - </label>
+    <input type="text" name="password" placeholder="Password"
+           [(ngModel)]="employeeLogin.password"
+           #validPassw="ngModel"
+           required
+           minlength="6"
+    >
+    <br>
+    <button [disabled]="!validFromLogin.valid">LOG IN</button>
+  </form>
+</div>
+
+<div>{{stringa}}</div>
+
+<div *ngIf="Register">
+  <form (ngSubmit)="registerNewUser()" #validFormRegister="ngForm">
+    <h2>Register</h2>
+    <label [ngClass]="validName.invalid  && validName.touched ? 'validRed' : 'validGreen'"> Name - </label>
+    <input name="name" placeholder="name"
+           [(ngModel)]="employee.name"
+           #validName="ngModel"
+           required
+    > <br>
+    <label [ngClass]="validEmail.invalid && validEmail.touched ? 'validRed' : 'validGreen'"> Email - </label>
+    <input name="email" placeholder="email"
+           [(ngModel)]="employee.email"
+           #validEmail="ngModel"
+           required
+           email
+    > <br>
+    <label [ngClass]="validPassw.invalid && validPassw.touched ? 'validRed' : 'validGreen'"> Passw - </label>
+    <input name="password" placeholder="password"
+           [(ngModel)]="employee.password"
+           #validPassw="ngModel"
+           required
+           minlength="6"
+    > <br>
+    <label [ngClass]="validAge.invalid && validAge.touched ? 'validRed' : 'validGreen'"> Agee - </label>
+    <input name="age" placeholder="age"
+           [(ngModel)]="employee.age"
+           #validAge="ngModel"
+           required
+    > <br>
+    <button [disabled]="!validFormRegister.valid">REGISTER</button>
+  </form>
+</div>
+
+<hr>
+<p></p>
+<button (click)="showHouses()">Show Houses</button>
+<div *ngIf="Houses">
+  <div *ngFor="let house of houses" [class.border]="'border'">
+    city: {{house.city}} <br>
+    size: {{house.size}} <br>
+
+    <button (click)="showAllInfo(house.idHouse)">showAllInfo</button>
+    <div *ngIf="house.idHouse === index">
+      rooms: {{house.rooms}} <br>
+      price: {{house.price}} <br>
+      owner: {{house.owner.name}} <br>
+      blocked: {{house.owner.is_blocked}} <br>
+    </div>
+  </div>
+</div>  <!--houses-->
+<hr>
+<br>
+<button (click)="showOwners()">Show Owners</button>
+<div *ngIf="Owners">
+  <div *ngFor="let owner of owners">
+    name: {{owner.name}} <br>
+    email: {{owner.email}} <br>
+    is_blocked: {{owner.is_blocked}} <br>
+  </div>
+</div>  <!--owners-->
+
